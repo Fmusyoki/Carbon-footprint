@@ -1,8 +1,10 @@
-import emissionRoutes from "../backend/routes/EmissionRoutes.js"
+import emissionRoutes from "../backend/routes/EmissionRoutes.js";
+import objectiveRoutes from "../backend/routes/objectiveRoutes.js";
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import 'dotenv/config';
+import signup from "./routes/UserRoutes.js";
 
 const app = express();
 
@@ -28,6 +30,21 @@ app.post('/createblog', (req, res) => {
 })
 // Emission Factor Routes
 app.use('/emissionfactors', emissionRoutes);
+
+// OBJECTIVES API
+app.use("/objectives", objectiveRoutes); 
+
+//REGISTER
+app.use("/", signup);
+
+
+//LOGIN
+app.use("/", signup);
+
+
+
+
+
 
 
 // Start server

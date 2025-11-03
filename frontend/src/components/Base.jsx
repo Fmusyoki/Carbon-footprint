@@ -4,25 +4,14 @@ import Footer from "./Footer";
 
 const Base = ({ children }) => {
   return (
-    <div style={styles.container}>
+    <div className="flex flex-col min-h-screen bg-gray-50 font-sans">
       <Navbar />
-      <main style={styles.main}>{children}</main>
+      <main className="flex-1 p-8 font-sans">
+        {children}
+      </main>
       <Footer />
     </div>
   );
-};
-
-const styles = {
-  container: {
-    display: "flex",
-    flexDirection: "column",
-    minHeight: "100vh",
-    backgroundColor: "#f9f9f9",
-  },
-  main: {
-    flex: 1,
-    padding: "2rem",
-  },
 };
 
 export default Base;
