@@ -4,7 +4,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import 'dotenv/config';
-import signup from "./routes/UserRoutes.js";
+import routes from "./routes/UserRoutes.js";
 
 const app = express();
 
@@ -35,11 +35,11 @@ app.use('/emissionfactors', emissionRoutes);
 app.use("/objectives", objectiveRoutes); 
 
 //REGISTER
-app.use("/", signup);
+app.use("/", routes);
 
 
 //LOGIN
-app.use("/", signup);
+app.use("/", routes);
 
 
 

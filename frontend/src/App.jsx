@@ -1,4 +1,7 @@
+// App.jsx
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./pages/Home";
 import Calculator from "./pages/Calculator";
 import Community from "./pages/Community";
@@ -9,17 +12,42 @@ import SignUp from "./Auth/SignUp";
 
 function App() {
   return (
-    <Router>
+    <AuthProvider>
+      <Router>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/calculator" element={<Calculator/>} />
-          <Route path="/community" element={<Community/>} />
-          <Route path="/ecocenter" element={<EcoCenter/>} />
-          <Route path="/actionplan" element={<ActionPlan/>} />
-          <Route path="/login" element={<LogIn/>} />
-          <Route path="/signup" element={<SignUp/>} />
+          {/* Public routes */}
+          <Route path="/" element={<LogIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          
+          {/* Protected routes */}
+          <Route path="/home" element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          } />
+          <Route path="/calculator" element={
+            <ProtectedRoute>
+              <Calculator />
+            </ProtectedRoute>
+          } />
+          <Route path="/community" element={
+            <ProtectedRoute>
+              <Community />
+            </ProtectedRoute>
+          } />
+          <Route path="/ecocenter" element={
+            <ProtectedRoute>
+              <EcoCenter />
+            </ProtectedRoute>
+          } />
+          <Route path="/actionplan" element={
+            <ProtectedRoute>
+              <ActionPlan />
+            </ProtectedRoute>
+          } />
         </Routes>
-    </Router>
+      </Router>
+    </AuthProvider>
   );
 }
 

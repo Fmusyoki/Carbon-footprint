@@ -25,7 +25,7 @@ const Navbar = () => {
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-6">
             <Link 
-              to="/" 
+              to="/home" 
               className={`px-4 py-2 rounded-lg !no-underline transition-all duration-200 transform ${
                 isActiveLink("/") 
                   ? "bg-green-700 text-white shadow-lg scale-105" 
@@ -73,16 +73,6 @@ const Navbar = () => {
               }`}
             >
               Community
-            </Link>
-            <Link 
-              to="/login" 
-              className={`px-4 py-2 rounded-lg !no-underline transition-all duration-200 transform ${
-                isActiveLink("/login") 
-                  ? "bg-green-700 text-white shadow-lg scale-105" 
-                  : "text-white hover:bg-green-800 hover:text-green-200 hover:scale-105 active:scale-95"
-              }`}
-            >
-              LogIn
             </Link>
           </div>
 

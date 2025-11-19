@@ -106,8 +106,8 @@ const SimpleObjectiveForm = () => {
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">🎯 Objectives</h1>
-          <p className="text-gray-600">Manage your goals and track progress</p>
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">Carbon Objectives</h1>
+          <p className="text-gray-600">Manage your goals and track progress to reduce emmissions</p>
         </div>
 
         {/* Form */}
