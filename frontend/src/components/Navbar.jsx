@@ -52,7 +52,7 @@ const Navbar = () => {
                   : "text-white hover:bg-green-800 hover:text-green-200 hover:scale-105 active:scale-95"
               }`}
             >
-              Action Plan
+              Sustainability Goals
             </Link>
             <Link 
               to="/ecocenter" 

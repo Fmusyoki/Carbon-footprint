@@ -106,7 +106,7 @@ const SimpleObjectiveForm = () => {
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">Carbon Objectives</h1>
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">Sustainability Goals</h1>
           <p className="text-gray-600">Manage your goals and track progress to reduce emmissions</p>
         </div>
 
@@ -212,7 +212,7 @@ const SimpleObjectiveForm = () => {
 
         {/* Objectives List */}
         <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-xl font-semibold mb-4">Your Objectives ({objectives.length})</h2>
+          <h2 className="text-xl font-semibold mb-4">Your Sustainability Goals ({objectives.length})</h2>
           
           {objectives.length === 0 ? (
             <div className="text-center py-8 text-gray-500">
