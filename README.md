@@ -16,7 +16,7 @@
 
 CarbonTrack is a modern web application that helps individuals and organizations monitor, analyze, and reduce their carbon footprint. With an intuitive interface and powerful tracking capabilities, users can make informed decisions to live more sustainably.
 
-![Live Appd](https://carbon-footprint-3.onrender.com/)
+![Live App](https://carbon-footprint-3.onrender.com/)
 
 ## ✨ Features
 
