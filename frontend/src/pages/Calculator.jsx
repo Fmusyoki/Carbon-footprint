@@ -33,12 +33,13 @@ const CarbonFootprintTracker = () => {
   const [history, setHistory] = useState([]);
 
   // Fetch emission factors from backend
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/emissionfactors/getemission")
-      .then((res) => setFactors(res.data))
-      .catch((err) => console.error("Error fetching emission factors:", err));
-  }, []);
+useEffect(() => {
+  const API_URL = import.meta.env.VITE_API_URL;
+  axios
+    .get(`${API_URL}/emissionfactors/getemission`)
+    .then((res) => setFactors(res.data))
+    .catch((err) => console.error("Error fetching emission factors:", err));
+}, []);
 
   // Load saved results on component mount
   useEffect(() => {
