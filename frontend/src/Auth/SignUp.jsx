@@ -17,7 +17,9 @@ const Signup = () => {
 
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Handle input changes
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -25,36 +27,49 @@ const Signup = () => {
     });
   };
 
+  // Handle signup form submission
   const handleSignup = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+
     try {
       const API = import.meta.env.VITE_API_URL; // Render backend URL
-
-      const response = await axios.post(`${API}/signup`, formData);
+      const response = await axios.post(`${API}/signup`, formData, {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
 
       if (response.data.success) {
-        setSuccessMessage("Registration Successful! Welcome to our eco-friendly community! 🌱");
+        setSuccessMessage(
+          "Registration Successful! Welcome to our eco-friendly community! 🌱"
+        );
         setShowSuccessPopup(true);
         login(response.data.user);
 
-        setTimeout(() => navigate("/"), 3000);
+        setTimeout(() => {
+          navigate("/");
+        }, 3000);
       } else {
         alert(response.data.message || "Registration failed");
       }
     } catch (error) {
-      console.log("Registration error:", error);
+      console.error("Registration error:", error);
       if (error.response?.data?.message) {
         alert(error.response.data.message);
       } else if (error.response?.status === 400) {
         alert("User already exists or invalid data");
       } else {
-        alert("Registration failed. Please try again.");
+        alert("Network or server error. Please try again.");
       }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-green-50 p-6">
+      {/* Success Popup */}
       {showSuccessPopup && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-xl shadow-xl p-8 text-center">
@@ -64,6 +79,7 @@ const Signup = () => {
         </div>
       )}
 
+      {/* Signup Form */}
       <form
         onSubmit={handleSignup}
         className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md space-y-4"
@@ -79,6 +95,7 @@ const Signup = () => {
           required
           className="w-full p-3 border rounded"
         />
+
         <input
           type="email"
           name="email"
@@ -88,6 +105,7 @@ const Signup = () => {
           required
           className="w-full p-3 border rounded"
         />
+
         <input
           type="password"
           name="password"
@@ -97,6 +115,7 @@ const Signup = () => {
           required
           className="w-full p-3 border rounded"
         />
+
         <input
           type="password"
           name="confirmPassword"
@@ -109,9 +128,12 @@ const Signup = () => {
 
         <button
           type="submit"
-          className="w-full bg-green-600 text-white p-3 rounded font-semibold hover:bg-green-700 transition"
+          disabled={isSubmitting}
+          className={`w-full p-3 rounded font-semibold text-white transition ${
+            isSubmitting ? "bg-green-400 cursor-not-allowed" : "bg-green-600 hover:bg-green-700"
+          }`}
         >
-          Sign Up
+          {isSubmitting ? "Creating Account..." : "Sign Up"}
         </button>
       </form>
     </div>
