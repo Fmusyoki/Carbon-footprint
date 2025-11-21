@@ -1,5 +1,5 @@
 # Carbon-footprint
-# 🌱 CarbonTrack - Carbon Footprint Tracker
+# ZeroTrace - Carbon Footprint Tracker
 
 <div align="center">
 
