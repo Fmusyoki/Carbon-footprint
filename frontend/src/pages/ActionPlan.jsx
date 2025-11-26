@@ -92,148 +92,94 @@ const SimpleObjectiveForm = () => {
   };
 
   const statusOptions = [
-    { value: 'pending', label: '⏳ Pending', color: 'bg-gray-100 text-gray-800' },
-    { value: 'in-progress', label: '🔄 In Progress', color: 'bg-blue-100 text-blue-800' },
-    { value: 'completed', label: '✅ Completed', color: 'bg-green-100 text-green-800' }
+    { value: 'pending', label: '⏳ Pending', color: 'bg-orange-50 text-orange-700 border-orange-200', dot: '🟠' },
+    { value: 'in-progress', label: '🔄 In Progress', color: 'bg-blue-50 text-blue-700 border-blue-200', dot: '🔵' },
+    { value: 'completed', label: '✅ Completed', color: 'bg-green-50 text-green-700 border-green-200', dot: '🟢' }
   ];
 
   const priorityOptions = [
-    { value: 'low', label: 'Low', color: 'bg-green-100 text-green-800' },
-    { value: 'medium', label: 'Medium', color: 'bg-yellow-100 text-yellow-800' },
-    { value: 'high', label: 'High', color: 'bg-red-100 text-red-800' }
+    { value: 'low', label: 'Low', color: 'bg-emerald-50 text-emerald-700 border-emerald-200', icon: '📈' },
+    { value: 'medium', label: 'Medium', color: 'bg-amber-50 text-amber-700 border-amber-200', icon: '⚡' },
+    { value: 'high', label: 'High', color: 'bg-rose-50 text-rose-700 border-rose-200', icon: '🚨' }
   ];
+
+  const getStatusIcon = (status) => {
+    return statusOptions.find(s => s.value === status)?.dot || '⚪';
+  };
+
+  const getPriorityIcon = (priority) => {
+    return priorityOptions.find(p => p.value === priority)?.icon || '📊';
+  };
 
   return (
     <Base>
-    <div className="min-h-screen bg-gray-50 p-6">
-      <div className="max-w-4xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">Sustainability Goals</h1>
-          <p className="text-gray-600">Manage your goals and track progress to reduce emissions</p>
-        </div>
-
-        {/* Form */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-          <h2 className="text-xl font-semibold mb-4">
-            {editingId ? 'Edit Objective' : 'Create New Objective'}
-          </h2>
-          
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Title *</label>
-                <input
-                  type="text"
-                  name="title"
-                  value={formData.title}
-                  onChange={handleChange}
-                  required
-                  className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  placeholder="Enter objective title"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Deadline</label>
-                <input
-                  type="date"
-                  name="deadline"
-                  value={formData.deadline}
-                  onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                />
-              </div>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50/30 p-4 sm:p-6">
+        <div className="max-w-6xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-3 bg-white/80 backdrop-blur-sm rounded-2xl px-6 py-3 shadow-sm border border-slate-200/60 mb-6">
+              <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+              <span className="text-sm font-medium text-slate-600">Sustainability Goals Manager</span>
             </div>
+            <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent mb-4">
+              Track Your Impact
+            </h1>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+              Set, manage, and achieve your sustainability objectives. Every goal brings us closer to a greener future.
+            </p>
+          </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
-              <textarea
-                name="description"
-                value={formData.description}
-                onChange={handleChange}
-                rows="3"
-                className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Describe your objective..."
-              />
-            </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Form Section */}
+            <div className="lg:col-span-1">
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-slate-200/60 p-6 sticky top-6">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className={`w-2 h-8 rounded-full ${editingId ? 'bg-amber-500' : 'bg-green-500'}`}></div>
+                  <h2 className="text-xl font-semibold text-slate-800">
+                    {editingId ? 'Edit Objective' : 'New Objective'}
+                  </h2>
+                </div>
+                
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2 flex items-center gap-2">
+                      <span>🎯</span>
+                      Title *
+                    </label>
+                    <input
+                      type="text"
+                      name="title"
+                      value={formData.title}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 bg-slate-50/50 border border-slate-300/50 rounded-xl focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all duration-200 placeholder-slate-400"
+                      placeholder="What do you want to achieve?"
+                    />
+                  </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
-                <select
-                  name="status"
-                  value={formData.status}
-                  onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                >
-                  {statusOptions.map(option => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2 flex items-center gap-2">
+                      <span>📝</span>
+                      Description
+                    </label>
+                    <textarea
+                      name="description"
+                      value={formData.description}
+                      onChange={handleChange}
+                      rows="3"
+                      className="w-full px-4 py-3 bg-slate-50/50 border border-slate-300/50 rounded-xl focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all duration-200 placeholder-slate-400 resize-none"
+                      placeholder="Describe your objective and its impact..."
+                    />
+                  </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Priority</label>
-                <select
-                  name="priority"
-                  value={formData.priority}
-                  onChange={handleChange}
-                  className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                >
-                  {priorityOptions.map(option => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-
-            <div className="flex gap-3 pt-2">
-              {editingId && (
-                <button
-                  type="button"
-                  onClick={resetForm}
-                  className="flex-1 bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-600 transition-colors"
-                >
-                  Cancel
-                </button>
-              )}
-              <button
-                type="submit"
-                disabled={loading}
-                className={`${editingId ? 'flex-1' : 'w-full'} bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors disabled:opacity-50`}
-              >
-                {loading ? 'Saving...' : editingId ? 'Update Objective' : 'Create Objective'}
-              </button>
-            </div>
-          </form>
-        </div>
-
-        {/* Objectives List */}
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-xl font-semibold mb-4">Your Sustainability Goals ({objectives.length})</h2>
-          
-          {objectives.length === 0 ? (
-            <div className="text-center py-8 text-gray-500">
-              No objectives created yet. Start by creating your first objective!
-            </div>
-          ) : (
-            <div className="space-y-4">
-              {objectives.map((objective) => (
-                <div key={objective._id} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
-                  <div className="flex justify-between items-start mb-2">
-                    <h3 className="font-semibold text-lg text-gray-800">{objective.title}</h3>
-                    <div className="flex gap-2">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-slate-700 mb-2">Status</label>
                       <select
-                        value={objective.status}
-                        onChange={(e) => handleStatusChange(objective._id, e.target.value)}
-                        className={`text-sm px-2 py-1 rounded border ${
-                          statusOptions.find(s => s.value === objective.status)?.color
-                        }`}
+                        name="status"
+                        value={formData.status}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 bg-slate-50/50 border border-slate-300/50 rounded-xl focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all duration-200 appearance-none cursor-pointer"
                       >
                         {statusOptions.map(option => (
                           <option key={option.value} value={option.value}>
@@ -241,44 +187,171 @@ const SimpleObjectiveForm = () => {
                           </option>
                         ))}
                       </select>
-                      
-                      <button
-                        onClick={() => handleEdit(objective)}
-                        className="bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600"
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-slate-700 mb-2">Priority</label>
+                      <select
+                        name="priority"
+                        value={formData.priority}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 bg-slate-50/50 border border-slate-300/50 rounded-xl focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all duration-200 appearance-none cursor-pointer"
                       >
-                        Edit
-                      </button>
-                      <button
-                        onClick={() => handleDelete(objective._id)}
-                        className="bg-red-500 text-white px-3 py-1 rounded text-sm hover:bg-red-600"
-                      >
-                        Delete
-                      </button>
+                        {priorityOptions.map(option => (
+                          <option key={option.value} value={option.value}>
+                            {option.label}
+                          </option>
+                        ))}
+                      </select>
                     </div>
                   </div>
 
-                  <p className="text-gray-600 mb-2">{objective.description}</p>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2 flex items-center gap-2">
+                      <span>📅</span>
+                      Deadline
+                    </label>
+                    <input
+                      type="date"
+                      name="deadline"
+                      value={formData.deadline}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 bg-slate-50/50 border border-slate-300/50 rounded-xl focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all duration-200"
+                    />
+                  </div>
 
-                  <div className="flex flex-wrap gap-2 text-sm">
-                    <span className={`px-2 py-1 rounded ${priorityOptions.find(p => p.value === objective.priority)?.color}`}>
-                      Priority: {objective.priority}
-                    </span>
-                    {objective.deadline && (
-                      <span className="bg-gray-100 text-gray-700 px-2 py-1 rounded">
-                        📅 {new Date(objective.deadline).toLocaleDateString()}
-                      </span>
+                  <div className="flex gap-3 pt-2">
+                    {editingId && (
+                      <button
+                        type="button"
+                        onClick={resetForm}
+                        className="flex-1 px-6 py-3 bg-slate-100 text-slate-700 rounded-xl font-medium hover:bg-slate-200 transition-all duration-200 active:scale-95 border border-slate-300/50"
+                      >
+                        Cancel
+                      </button>
                     )}
-                    <span className="text-gray-500">
-                      Created: {new Date(objective.createdAt).toLocaleDateString()}
-                    </span>
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className={`${editingId ? 'flex-1' : 'w-full'} px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl font-medium hover:from-green-600 hover:to-emerald-700 transition-all duration-200 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-green-500/25`}
+                    >
+                      {loading ? (
+                        <span className="flex items-center justify-center gap-2">
+                          <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                          Saving...
+                        </span>
+                      ) : editingId ? (
+                        'Update Goal'
+                      ) : (
+                        'Create Goal'
+                      )}
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            {/* Objectives List */}
+            <div className="lg:col-span-2">
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-slate-200/60 p-6">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+                  <div>
+                    <h2 className="text-2xl font-bold text-slate-800">Your Goals</h2>
+                    <p className="text-slate-600 mt-1">
+                      {objectives.length} objective{objectives.length !== 1 ? 's' : ''} in progress
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-4 text-sm">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                      <span className="text-slate-600">{objectives.filter(o => o.status === 'completed').length} Completed</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+                      <span className="text-slate-600">{objectives.filter(o => o.status === 'in-progress').length} In Progress</span>
+                    </div>
                   </div>
                 </div>
-              ))}
+                
+                {objectives.length === 0 ? (
+                  <div className="text-center py-12">
+                    <div className="w-24 h-24 mx-auto mb-4 bg-slate-100 rounded-2xl flex items-center justify-center">
+                      <span className="text-3xl">🎯</span>
+                    </div>
+                    <h3 className="text-lg font-semibold text-slate-700 mb-2">No goals yet</h3>
+                    <p className="text-slate-500 mb-6">Create your first sustainability goal to get started</p>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    {objectives.map((objective) => (
+                      <div key={objective._id} className="group bg-white border border-slate-300/50 rounded-xl p-5 hover:shadow-lg transition-all duration-200 hover:border-slate-400/50">
+                        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-3">
+                          <div className="flex-1">
+                            <div className="flex items-center gap-3 mb-2">
+                              <span className="text-lg">{getStatusIcon(objective.status)}</span>
+                              <h3 className="font-semibold text-slate-800 text-lg">{objective.title}</h3>
+                            </div>
+                            <p className="text-slate-600 leading-relaxed">{objective.description}</p>
+                          </div>
+                          
+                          <div className="flex items-center gap-2 shrink-0">
+                            <select
+                              value={objective.status}
+                              onChange={(e) => handleStatusChange(objective._id, e.target.value)}
+                              className={`px-3 py-2 rounded-lg border text-sm font-medium transition-all duration-200 cursor-pointer ${
+                                statusOptions.find(s => s.value === objective.status)?.color
+                              } hover:shadow-sm`}
+                            >
+                              {statusOptions.map(option => (
+                                <option key={option.value} value={option.value}>
+                                  {option.label}
+                                </option>
+                              ))}
+                            </select>
+                            
+                            <button
+                              onClick={() => handleEdit(objective)}
+                              className="p-2 bg-slate-100 text-slate-600 rounded-lg hover:bg-slate-200 transition-all duration-200 active:scale-95"
+                              title="Edit"
+                            >
+                              <span className="w-4 h-4">✏️</span>
+                            </button>
+                            <button
+                              onClick={() => handleDelete(objective._id)}
+                              className="p-2 bg-rose-50 text-rose-600 rounded-lg hover:bg-rose-100 transition-all duration-200 active:scale-95"
+                              title="Delete"
+                            >
+                              <span className="w-4 h-4">🗑️</span>
+                            </button>
+                          </div>
+                        </div>
+
+                        <div className="flex flex-wrap items-center gap-3 pt-3 border-t border-slate-200/60">
+                          <span className={`px-3 py-1.5 rounded-lg text-sm font-medium border ${priorityOptions.find(p => p.value === objective.priority)?.color}`}>
+                            <span className="mr-1.5">{getPriorityIcon(objective.priority)}</span>
+                            {objective.priority} Priority
+                          </span>
+                          
+                          {objective.deadline && (
+                            <span className="px-3 py-1.5 bg-slate-50 text-slate-700 rounded-lg text-sm font-medium border border-slate-200">
+                              <span className="mr-1.5">📅</span>
+                              Due {new Date(objective.deadline).toLocaleDateString()}
+                            </span>
+                          )}
+                          
+                          <span className="px-3 py-1.5 bg-slate-50 text-slate-500 rounded-lg text-sm border border-slate-200">
+                            Created {new Date(objective.createdAt).toLocaleDateString()}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
-          )}
+          </div>
         </div>
       </div>
-    </div>
     </Base>
   );
 };
