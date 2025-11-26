@@ -14,6 +14,8 @@ const SimpleObjectiveForm = () => {
     deadline: ''
   });
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   // Fetch objectives on component mount
   useEffect(() => {
     fetchObjectives();
@@ -21,7 +23,7 @@ const SimpleObjectiveForm = () => {
 
   const fetchObjectives = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/objectives/');
+      const response = await axios.get(`${API_URL}/objectives/`);
       if (response.data.success) setObjectives(response.data.data);
     } catch (error) {
       console.error('Error fetching objectives:', error);
@@ -38,15 +40,16 @@ const SimpleObjectiveForm = () => {
     
     try {
       if (editingId) {
-        await axios.put(`http://localhost:5000/objectives/${editingId}`, formData);
+        await axios.put(`${API_URL}/objectives/${editingId}`, formData);
       } else {
-        await axios.post('http://localhost:5000/objectives/', formData);
+        await axios.post(`${API_URL}/objectives/`, formData);
       }
       
+      // Reset form and refresh data
       resetForm();
       await fetchObjectives();
     } catch (error) {
-      console.error('Error saving objective:', error);
+      console.error("Error saving objective:", error);
     } finally {
       setLoading(false);
     }
@@ -66,7 +69,7 @@ const SimpleObjectiveForm = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this objective?')) {
       try {
-        await axios.delete(`http://localhost:5000/objectives/${id}`);
+        await axios.delete(`${API_URL}/objectives/${id}`);
         await fetchObjectives();
       } catch (error) {
         console.error('Error deleting objective:', error);
@@ -76,7 +79,7 @@ const SimpleObjectiveForm = () => {
 
   const handleStatusChange = async (id, newStatus) => {
     try {
-      await axios.put(`http://localhost:5000/objectives/${id}`, { status: newStatus });
+      await axios.put(`${API_URL}/objectives/${id}`, { status: newStatus });
       await fetchObjectives();
     } catch (error) {
       console.error('Error updating status:', error);
@@ -107,7 +110,7 @@ const SimpleObjectiveForm = () => {
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-800 mb-2">Sustainability Goals</h1>
-          <p className="text-gray-600">Manage your goals and track progress to reduce emmissions</p>
+          <p className="text-gray-600">Manage your goals and track progress to reduce emissions</p>
         </div>
 
         {/* Form */}
