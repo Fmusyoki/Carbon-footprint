@@ -4,317 +4,228 @@ import Base from "../components/Base";
 import axios from "axios";
 
 const BlogPage = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    category: 'sustainability',
-    title: '',
-    content: '',
-    tags: ''
-  });
-
-  const [blogs, setBlogs] = useState([]);
-  const [showForm, setShowForm] = useState(false);
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    axios.post("http://localhost:5000/createblog", {name ,email,category, title, content, tags})
-   
-  };
 
   return (
     <Base>
       <div className="min-vh-100 bg-light">
-        {/* Hero Section */}
+        {/* Hero Section - Updated */}
         <section className="bg-success text-white py-5">
           <div className="container">
             <div className="row align-items-center">
               <div className="col-lg-8">
+                <div className="d-flex align-items-center gap-3 mb-3">
+                  <span className="badge bg-warning text-dark fs-6">Community Features Coming Soon</span>
+                </div>
                 <h1 className="display-5 fw-bold mb-4">
-                  Sustainability Blog & Community
+                  Sustainability Community Hub
                 </h1>
                 <p className="lead mb-4">
-                  Share your eco-friendly journey, learn from others, and contribute to our growing community of climate-conscious individuals.
+                  We're building an amazing community space where you can share your eco-friendly journey, learn from others, and connect with climate-conscious individuals. Stay tuned!
                 </p>
                 <div className="d-flex flex-wrap gap-3">
                   <button 
                     onClick={() => setShowForm(true)}
                     className="btn btn-light btn-lg px-4 py-2 fw-semibold"
+                    disabled
                   >
-                    Write a Blog Post →
+                    ✨ Write a Blog Post (Coming Soon)
                   </button>
-                  <Link to="/community" className="btn btn-outline-light btn-lg px-4 py-2 fw-semibold">
-                    Join Community
-                  </Link>
+                  <button className="btn btn-outline-light btn-lg px-4 py-2 fw-semibold" disabled>
+                    👥 Join Community (Coming Soon)
+                  </button>
                 </div>
               </div>
               <div className="col-lg-4 text-center">
-                <div className="display-1">📝</div>
+                <div className="display-1">🚧</div>
+                <p className="text-warning fw-semibold mt-2">Under Construction</p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Blog Form Modal */}
-        {showForm && (
-          <div className="modal fade show d-block" tabIndex="-1" style={{backgroundColor: 'rgba(0,0,0,0.5)'}}>
-            <div className="modal-dialog modal-lg">
-              <div className="modal-content">
-                <div className="modal-header bg-success text-white">
-                  <h5 className="modal-title">Write a New Blog Post</h5>
-                  <button 
-                    type="button" 
-                    className="btn-close btn-close-white"
-                    onClick={() => setShowForm(false)}
-                  ></button>
-                </div>
-                <form onSubmit={handleSubmit}>
-                  <div className="modal-body">
-                    <div className="row g-3">
-                      <div className="col-md-6">
-                        <label className="form-label fw-semibold">Your Name *</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          name="name"
-                          value={formData.name}
-                          onChange={handleChange}
-                          required
-                          placeholder="Enter your full name"
-                        />
-                      </div>
-                      <div className="col-md-6">
-                        <label className="form-label fw-semibold">Email *</label>
-                        <input
-                          type="email"
-                          className="form-control"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleChange}
-                          required
-                          placeholder="Enter your email"
-                        />
-                      </div>
-                      <div className="col-md-6">
-                        <label className="form-label fw-semibold">Category *</label>
-                        <select
-                          className="form-select"
-                          name="category"
-                          value={formData.category}
-                          onChange={handleChange}
-                          required
-                        >
-                          <option value="sustainability">Sustainability</option>
-                          <option value="energy">Energy</option>
-                          <option value="transportation">Transportation</option>
-                          <option value="food">Food</option>
-                          <option value="lifestyle">Lifestyle</option>
-                          <option value="technology">Technology</option>
-                          <option value="policy">Policy</option>
-                        </select>
-                      </div>
-                      <div className="col-md-6">
-                        <label className="form-label fw-semibold">Tags</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          name="tags"
-                          value={formData.tags}
-                          onChange={handleChange}
-                          placeholder="e.g., carbon, recycling, solar"
-                        />
-                      </div>
-                      <div className="col-12">
-                        <label className="form-label fw-semibold">Blog Title *</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          name="title"
-                          value={formData.title}
-                          onChange={handleChange}
-                          required
-                          placeholder="Enter an engaging title"
-                        />
-                      </div>
-                      <div className="col-12">
-                        <label className="form-label fw-semibold">Content *</label>
-                        <textarea
-                          className="form-control"
-                          name="content"
-                          rows="8"
-                          value={formData.content}
-                          onChange={handleChange}
-                          required
-                          placeholder="Share your thoughts, experiences, and insights..."
-                        ></textarea>
-                        <div className="form-text">
-                          Minimum 200 characters. Write about your sustainability journey, tips, or research.
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="modal-footer">
-                    <button 
-                      type="button" 
-                      className="btn btn-secondary"
-                      onClick={() => setShowForm(false)}
-                    >
-                      Cancel
-                    </button>
-                    <button 
-                      type="submit" 
-                      className="btn btn-success"
-                      disabled={formData.content.length < 200}
-                    >
-                      Publish Blog Post
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Blog Posts Section */}
+        {/* Coming Soon Features */}
         <section className="py-5">
           <div className="container">
-            <div className="row mb-4">
-              <div className="col-12">
-                <div className="d-flex justify-content-between align-items-center">
-                  <h2 className="fw-bold text-success">Community Blog Posts</h2>
-                  <div className="d-flex gap-2">
-                    <select className="form-select" style={{width: 'auto'}}>
-                      <option>All Categories</option>
-                      <option>Sustainability</option>
-                      <option>Energy</option>
-                      <option>Transportation</option>
-                      <option>Food</option>
-                      <option>Lifestyle</option>
-                    </select>
-                    <button 
-                      onClick={() => setShowForm(true)}
-                      className="btn btn-success"
-                    >
-                      + New Post
-                    </button>
+            <div className="text-center mb-5">
+              <h2 className="fw-bold text-success mb-3">Exciting Community Features Coming Your Way</h2>
+              <p className="text-muted lead">We're working hard to bring you these amazing features</p>
+            </div>
+            
+            <div className="row g-4">
+              {/* Feature 1 */}
+              <div className="col-md-6 col-lg-4">
+                <div className="card border-0 shadow-sm h-100 bg-warning bg-opacity-10">
+                  <div className="card-body text-center p-4">
+                    <div className="text-warning mb-3">
+                      <span style={{fontSize: '3rem'}}>📝</span>
+                    </div>
+                    <h5 className="fw-bold text-dark">Blog Platform</h5>
+                    <p className="text-muted">
+                      Share your sustainability journey, tips, and experiences with our growing community
+                    </p>
+                    <div className="mt-3">
+                      <span className="badge bg-warning text-dark">Coming Soon</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Feature 2 */}
+              <div className="col-md-6 col-lg-4">
+                <div className="card border-0 shadow-sm h-100 bg-info bg-opacity-10">
+                  <div className="card-body text-center p-4">
+                    <div className="text-info mb-3">
+                      <span style={{fontSize: '3rem'}}>👥</span>
+                    </div>
+                    <h5 className="fw-bold text-dark">Community Forums</h5>
+                    <p className="text-muted">
+                      Discuss sustainability topics, ask questions, and connect with like-minded individuals
+                    </p>
+                    <div className="mt-3">
+                      <span className="badge bg-info">Phase 2</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Feature 3 */}
+              <div className="col-md-6 col-lg-4">
+                <div className="card border-0 shadow-sm h-100 bg-success bg-opacity-10">
+                  <div className="card-body text-center p-4">
+                    <div className="text-success mb-3">
+                      <span style={{fontSize: '3rem'}}>🏆</span>
+                    </div>
+                    <h5 className="fw-bold text-dark">Challenges & Rewards</h5>
+                    <p className="text-muted">
+                      Participate in sustainability challenges and earn recognition for your eco-friendly efforts
+                    </p>
+                    <div className="mt-3">
+                      <span className="badge bg-success">Phase 3</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
+        </section>
 
-            {/* Blog Posts Grid */}
-            {blogs.length > 0 ? (
-              <div className="row g-4">
-                {blogs.map((blog) => (
-                  <div key={blog.id} className="col-lg-6">
-                    <div className="card h-100 shadow-sm border-0">
-                      <div className="card-body">
-                        <div className="d-flex justify-content-between align-items-start mb-2">
-                          <span className="badge bg-success">{blog.category}</span>
-                          <small className="text-muted">{blog.readTime}</small>
+        {/* Current Blog Posts Placeholder */}
+        <section className="bg-white py-5">
+          <div className="container">
+            <div className="text-center mb-5">
+              <h2 className="fw-bold text-success mb-3">Featured Sustainability Stories</h2>
+              <p className="text-muted">Get inspired while we build the community features</p>
+            </div>
+
+            <div className="row g-4">
+              {/* Placeholder Blog Post 1 */}
+              <div className="col-lg-6">
+                <div className="card border-0 shadow-sm h-100">
+                  <div className="card-body p-4">
+                    <div className="d-flex justify-content-between align-items-start mb-3">
+                      <span className="badge bg-success">Sustainability</span>
+                      <small className="text-muted">5 min read</small>
+                    </div>
+                    <h5 className="card-title fw-bold text-dark">How I Reduced My Carbon Footprint by 40%</h5>
+                    <p className="card-text text-muted">
+                      Discover simple lifestyle changes that made a significant impact on my environmental footprint...
+                    </p>
+                    <div className="mt-4">
+                      <div className="d-flex justify-content-between align-items-center">
+                        <div>
+                          <small className="fw-semibold text-dark">Community Member</small>
+                          <br />
+                          <small className="text-muted">Coming Soon</small>
                         </div>
-                        <h5 className="card-title fw-bold text-dark">{blog.title}</h5>
-                        <p className="card-text text-muted">{blog.content.substring(0, 150)}...</p>
-                        <div className="mt-auto">
-                          <div className="d-flex justify-content-between align-items-center">
-                            <div>
-                              <small className="fw-semibold text-dark">{blog.author}</small>
-                              <br />
-                              <small className="text-muted">{new Date(blog.date).toLocaleDateString()}</small>
-                            </div>
-                            <button className="btn btn-outline-success btn-sm">
-                              Read More
-                            </button>
-                          </div>
-                        </div>
+                        <button className="btn btn-outline-success btn-sm" disabled>
+                          Read More (Soon)
+                        </button>
                       </div>
                     </div>
                   </div>
-                ))}
+                </div>
               </div>
-            ) : (
-              <div className="text-center py-5">
-                <div className="display-1 text-muted mb-3">📝</div>
-                <h4 className="text-muted mb-3">No Blog Posts Yet</h4>
-                <p className="text-muted mb-4">
-                  Be the first to share your sustainability journey with our community.
-                </p>
-                <button 
-                  onClick={() => setShowForm(true)}
-                  className="btn btn-success btn-lg"
-                >
-                  Write Your First Post
-                </button>
-              </div>
-            )}
-          </div>
-        </section>
 
-        {/* Features Section */}
-        <section className="bg-white py-5">
-          <div className="container">
-            <h3 className="text-center fw-bold mb-5">Why Share Your Story?</h3>
-            <div className="row g-4">
-              <div className="col-md-4">
-                <div className="text-center p-4">
-                  <div className="text-success mb-3">
-                    <i className="bi bi-people fs-1"></i>
+              {/* Placeholder Blog Post 2 */}
+              <div className="col-lg-6">
+                <div className="card border-0 shadow-sm h-100">
+                  <div className="card-body p-4">
+                    <div className="d-flex justify-content-between align-items-start mb-3">
+                      <span className="badge bg-info">Energy</span>
+                      <small className="text-muted">7 min read</small>
+                    </div>
+                    <h5 className="card-title fw-bold text-dark">Solar Power: My First Year Experience</h5>
+                    <p className="card-text text-muted">
+                      A comprehensive look at the costs, benefits, and surprises of switching to solar energy at home...
+                    </p>
+                    <div className="mt-4">
+                      <div className="d-flex justify-content-between align-items-center">
+                        <div>
+                          <small className="fw-semibold text-dark">Community Member</small>
+                          <br />
+                          <small className="text-muted">Coming Soon</small>
+                        </div>
+                        <button className="btn btn-outline-success btn-sm" disabled>
+                          Read More (Soon)
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                  <h5 className="fw-bold">Inspire Others</h5>
-                  <p className="text-muted mb-0">
-                    Your experiences can motivate others to adopt sustainable practices and make positive changes.
-                  </p>
-                </div>
-              </div>
-              <div className="col-md-4">
-                <div className="text-center p-4">
-                  <div className="text-success mb-3">
-                    <i className="bi bi-lightbulb fs-1"></i>
-                  </div>
-                  <h5 className="fw-bold">Share Knowledge</h5>
-                  <p className="text-muted mb-0">
-                    Help others learn from your successes and challenges in reducing carbon footprint.
-                  </p>
-                </div>
-              </div>
-              <div className="col-md-4">
-                <div className="text-center p-4">
-                  <div className="text-success mb-3">
-                    <i className="bi bi-heart fs-1"></i>
-                  </div>
-                  <h5 className="fw-bold">Build Community</h5>
-                  <p className="text-muted mb-0">
-                    Connect with like-minded individuals passionate about environmental conservation.
-                  </p>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* CTA Section */}
+        {/* Newsletter Signup */}
         <section className="bg-light py-5">
-          <div className="container text-center">
-            <h3 className="fw-bold mb-3">Ready to Share Your Story?</h3>
-            <p className="text-muted mb-4">
-              Join our community of climate advocates and inspire others with your sustainability journey.
-            </p>
-            <button 
-              onClick={() => setShowForm(true)}
-              className="btn btn-success btn-lg px-5"
-            >
-              Start Writing
-            </button>
+          <div className="container">
+            <div className="row justify-content-center">
+              <div className="col-lg-8 text-center">
+                <div className="bg-white rounded-3 p-5 shadow-sm">
+                  <h3 className="fw-bold text-success mb-3">Be the First to Know!</h3>
+                  <p className="text-muted mb-4">
+                    Get notified when our community features launch and be among the first to join the conversation.
+                  </p>
+                  <div className="row g-3 justify-content-center">
+                    <div className="col-md-8">
+                      <input 
+                        type="email" 
+                        className="form-control form-control-lg" 
+                        placeholder="Enter your email address"
+                      />
+                    </div>
+                    <div className="col-md-4">
+                      <button className="btn btn-success btn-lg w-100">
+                        Notify Me
+                      </button>
+                    </div>
+                  </div>
+                  <small className="text-muted mt-3 d-block">
+                    We'll only email you about major updates. No spam, ever.
+                  </small>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
-      </div>
+
+        {/* Blog Form Modal - Updated with Coming Soon */}
+                <div className="modal-body text-center py-5">
+                  <div className="display-1 text-warning mb-3">🚧</div>
+                  <h4 className="text-dark mb-3">Blog Feature Under Construction</h4>
+                  <p className="text-muted mb-4">
+                    We're excited to launch our community blogging platform soon! 
+                    You'll be able to share your sustainability stories and connect with others.
+                  </p>
+                  <button 
+                    className="btn btn-warning btn-lg"
+                    onClick={() => setShowForm(false)}
+                  >
+                    Got it!
+                  </button>
+                </div>
+              </div>
     </Base>
   );
 };
