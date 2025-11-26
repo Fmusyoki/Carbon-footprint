@@ -804,9 +804,9 @@ useEffect(() => {
                         <p className="text-green-700 mb-3 sm:mb-4 text-sm sm:text-base">
                           Start implementing these recommendations today and track your progress over time.
                         </p>
-                        <button href="/actionplan" className="bg-green-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg sm:rounded-xl font-semibold hover:bg-green-700 transition-colors duration-200 text-sm sm:text-base">
+                        <a href="/actionplan" className="bg-green-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg sm:rounded-xl font-semibold hover:bg-green-700 transition-colors duration-200 text-sm sm:text-base">
                           View Your Action Plan
-                        </button>
+                        </a>
                       </div>
                     </div>
                   </div>
