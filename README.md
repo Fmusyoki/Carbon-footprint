@@ -1,22 +1,4 @@
-# Carbon-footprint
-# ZeroTrace - Carbon Footprint Tracker
-
-<div align="center">
-
-[![React](https://img.shields.io/badge/React-18.2.0-61dafb?logo=react)](https://reactjs.org/)
-[![Node.js](https://img.shields.io/badge/Node.js-18.0%2B-green?logo=nodedotjs)](https://nodejs.org/)
-[![MongoDB](https://img.shields.io/badge/MongoDB-5.0%2B-green?logo=mongodb)](https://mongodb.com/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38b2ac?logo=tailwindcss)](https://tailwindcss.com/)
-
-**Track Your Environmental Impact • Make Sustainable Choices • Reduce Carbon Emissions**
-
-</div>
-
-## 📖 Overview
-
-CarbonTrack is a modern web application that helps individuals and organizations monitor, analyze, and reduce their carbon footprint. With an intuitive interface and powerful tracking capabilities, users can make informed decisions to live more sustainably.
-
-![CarbonTrack Dashboard](https://via.placeholder.com/800x400/00ff00/ffffff?text=CarbonTrack+Dashboard)
+#LIVE APP: https://carbon-footprint-3.onrender.com/
 
 ## ✨ Features
 
